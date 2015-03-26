@@ -23,7 +23,7 @@ public class Tape {
 	}
 	
 	public void setSymbolAtPosition(char symbol,int position) {
-		if(position >= 0 || position < content.length()) {
+		if(position >= 0 && position < content.length()) {
 			content.replace(position, position, symbol+"");
 			try {
 				content.charAt(position+1);

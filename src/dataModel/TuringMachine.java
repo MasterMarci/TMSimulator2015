@@ -11,7 +11,7 @@ public class TuringMachine {
 	private ArrayList<Character> tapeAlphabet = new ArrayList<Character>();
 	private ArrayList<String> states = new ArrayList<String>();
 	private int headPosition=0;
-	private boolean IsMachineRunning =false;
+	private boolean machineRunning =false;
 	private String currentState="";
 	private String startState="";
 	private String endState ="";
@@ -46,7 +46,7 @@ public class TuringMachine {
 	}
 	
 	public void setInputAlphabet(ArrayList<Character> inputAlphabet) throws Exception {
-		if(!IsMachineRunning) {
+		if(!machineRunning) {
 			this.inputAlphabet = inputAlphabet;
 		} else {
 			throw new Exception("You can't change the input alphabet while running the machine!");
@@ -57,19 +57,19 @@ public class TuringMachine {
 	}
 	
 	public void setTapeAlphabet(ArrayList<Character> tapeAlphabet) throws Exception {
-		if(!IsMachineRunning) {
+		if(!machineRunning) {
 			this.tapeAlphabet = tapeAlphabet;
 		} else {
 			throw new Exception("You can't change the tape alphabet while running the machine!");
 		}
 	}
 	
-	public boolean isIsMachineRunning() {
-		return IsMachineRunning;
+	public boolean isMachineRunning() {
+		return machineRunning;
 	}
 	
-	public void setIsMachineRunning(boolean isMachineRunning) {
-		IsMachineRunning = isMachineRunning;
+	public void setMachineRunning(boolean isMachineRunning) {
+		machineRunning = isMachineRunning;
 	}
 	
 	public ArrayList<String> getStates() {
@@ -77,7 +77,7 @@ public class TuringMachine {
 	}
 	
 	public void setStates(ArrayList<String> states) throws Exception {
-		if(!IsMachineRunning) {
+		if(!machineRunning) {
 			this.states = states;
 		} else {
 			throw new Exception("You can't change the state set while running the machine!");
@@ -95,7 +95,7 @@ public class TuringMachine {
 	public boolean validateInstructionList() {
 		for(char symbol : this.getTapeAlphabet()) {
 			for(String state : this.getStates()) {
-				if(getMatchingInstruction(state, symbol) == null) {
+				if(getMatchingInstruction(state, symbol) == null && !state.equals(this.getEndState())) {
 					return false;
 				}
 			}
@@ -124,13 +124,13 @@ public class TuringMachine {
 		if(!validateStates() || !validateInstructionList()) {
 			throw new Exception("Invalid Declaration of a Turing machine");
 		}
-		this.setIsMachineRunning(true);
+		this.setMachineRunning(true);
 		this.setHeadPosition(0);
 		currentState=this.getStartState();
-		while(IsMachineRunning && !currentState.equals(endState)) {
+		while(isMachineRunning() && !currentState.equals(endState)) {
 			//Find next instruction to execute
 			Instruction currentInstruction=getMatchingInstruction(currentState,tape.getSymbolAt(this.getHeadPosition()));
-			
+			System.out.println(tape.getContent());
 			tape.setSymbolAtPosition(currentInstruction.getOutput(), this.getHeadPosition());
 			
 			//Set new head position according to the instruction
@@ -149,7 +149,7 @@ public class TuringMachine {
 			currentState=currentInstruction.getEndState();	
 			
 		}
-		this.setIsMachineRunning(false);
+		this.setMachineRunning(false);
 	}
 	public String getStartState() {
 		return startState;
