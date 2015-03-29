@@ -6,6 +6,7 @@ import java.net.URL;
 
 import javax.sound.midi.SysexMessage;
 
+import dataModel.TuringMachine;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,12 +17,14 @@ public class TuringMachineSimulatorApplication extends Application {
 
 	private Stage primaryStage;
 	private MainViewController mainController;
+	private TuringMachine tm = new TuringMachine();
 	
 	@Override
 	public void start(Stage arg0) throws Exception {
 		this.primaryStage = arg0;
 		this.primaryStage.setTitle("TuringMachineSimulator");
 		showMainScene();
+		this.primaryStage.show();
 
 	}
 
@@ -32,6 +35,7 @@ public class TuringMachineSimulatorApplication extends Application {
 			AnchorPane pane = loader.load();
 			this.mainController=loader.getController();
 			this.primaryStage.setScene(new Scene(pane));
+			this.mainController.setApplication(this);
 			
 		} catch (MalformedURLException e) {
 			e.printStackTrace();

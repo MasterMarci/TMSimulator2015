@@ -11,7 +11,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="main.gui.MainViewController">
   <children>
     <SplitPane dividerPositions="0.6614310645724258" focusTraversable="true" orientation="VERTICAL" prefHeight="575.0" prefWidth="818.0" AnchorPane.bottomAnchor="-175.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-218.0" AnchorPane.topAnchor="0.0">
       <items>
@@ -21,20 +21,20 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="leftACPane">
                   <children>
-                    <TextField layoutX="49.0" layoutY="72.0" prefWidth="200.0" />
+                    <TextField id="inputAlphabetTextField" fx:id="tapeInputTextField" layoutX="49.0" layoutY="72.0" prefWidth="200.0" />
                     <Label alignment="CENTER" layoutX="49.0" layoutY="43.0" prefHeight="22.000099999997474" prefWidth="107.0" text="Eingabe:">
                       <font>
                         <Font size="16.0" fx:id="x1" />
                       </font>
                     </Label>
-                    <TextField layoutX="49.0" layoutY="150.0" prefWidth="200.0" />
+                    <TextField fx:id="inputAlphabetTextField" layoutX="49.0" layoutY="150.0" prefWidth="200.0" />
                     <Label alignment="CENTER" font="$x1" layoutX="49.0" layoutY="122.0" prefHeight="23.0" prefWidth="146.0" text="Eingabealphabet:" />
-                    <TextField layoutX="49.0" layoutY="228.0" prefWidth="200.0" />
+                    <TextField fx:id="tapeAlphabetTextField" layoutX="49.0" layoutY="228.0" prefWidth="200.0" />
                     <Label alignment="CENTER" font="$x1" layoutX="49.0" layoutY="199.0" prefHeight="23.0" prefWidth="132.00009999999747" text="Arbeitsalphabet:" />
-                    <TextField layoutX="49.0" layoutY="306.0" prefWidth="200.0" />
+                    <TextField fx:id="statesTextField" layoutX="49.0" layoutY="306.0" prefWidth="200.0" />
                     <Label alignment="CENTER" font="$x1" layoutX="49.0" layoutY="278.0" prefHeight="23.0" prefWidth="146.0" text="Zustandsmenge:" />
-                    <Button layoutX="269.0" layoutY="306.0" mnemonicParsing="false" prefHeight="22.9998779296875" text="Starte TM" />
-                    <ChoiceBox layoutX="317.0" layoutY="152.0">
+                    <Button fx:id="startTMButton" layoutX="269.0" layoutY="306.0" mnemonicParsing="false" prefHeight="22.9998779296875" text="Starte TM" />
+                    <ChoiceBox fx:id="startStateChoiceBox" layoutX="317.0" layoutY="152.0">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="Item 1" />
@@ -44,7 +44,7 @@
                       </items>
                     </ChoiceBox>
                     <Label alignment="CENTER" font="$x1" layoutX="283.0" layoutY="122.0" prefHeight="23.0" prefWidth="107.0" text="Startzustand:" />
-                    <ChoiceBox layoutX="317.0" layoutY="229.0">
+                    <ChoiceBox fx:id="endStateChoiceBox" layoutX="317.0" layoutY="229.0">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="Item 1" />
@@ -111,13 +111,13 @@
                         <Button mnemonicParsing="false" text="Hinzufügen" />
                       </children>
                     </HBox>
-                    <TableView layoutX="14.0" layoutY="108.0" prefHeight="222.0" prefWidth="289.0">
+                    <TableView fx:id="instructionTable" layoutX="14.0" layoutY="108.0" prefHeight="222.0" prefWidth="289.0">
                       <columns>
-                        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="50.0" text="Z In" />
-                        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="56.0" text="Z Out" />
-                        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="55.0" text="T In" />
-                        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="58.0" text="T Out" />
-                        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="68.0" text="Richtung" />
+                        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="50.0" text="Z In" fx:id="inputStateColumn" />
+                        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="56.0" text="Z Out" fx:id="outputStateColumn" />
+                        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="55.0" text="T In" fx:id="tapeInputColumn" />
+                        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="58.0" text="T Out" fx:id="tapeOutputColumn" />
+                        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="68.0" text="Richtung" fx:id="headDirectionColumn" />
                       </columns>
                     </TableView>
                   </children>
@@ -131,12 +131,12 @@
         </AnchorPane>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="228.0" prefWidth="704.0">
           <children>
-            <HBox focusTraversable="false" layoutX="15.0" layoutY="46.0" mouseTransparent="false" prefHeight="60.0" prefWidth="782.0" rotate="0.0">
+            <HBox fx:id="tapeHBox" focusTraversable="false" layoutX="15.0" layoutY="46.0" mouseTransparent="false" prefHeight="60.0" prefWidth="782.0" rotate="0.0">
               <padding>
                 <Insets />
               </padding>
             </HBox>
-            <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="15.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="headPositionImageView" fitHeight="60.0" fitWidth="60.0" layoutX="15.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true" />
           </children>
         </AnchorPane>
       </items>
