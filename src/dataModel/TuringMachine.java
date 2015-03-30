@@ -1,20 +1,21 @@
 package dataModel;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 
 public class TuringMachine {
 	
 	private ArrayList<Instruction> instructionList = new ArrayList<Instruction>();
 	private Tape tape = new Tape();
 
-	private ArrayList<Character> inputAlphabet = new ArrayList<Character>();
-	private ArrayList<Character> tapeAlphabet = new ArrayList<Character>();
-	private ArrayList<String> states = new ArrayList<String>();
+	private LinkedHashSet<Character> inputAlphabet = new LinkedHashSet<>();
+	private LinkedHashSet<Character> tapeAlphabet = new LinkedHashSet<>();
+	private LinkedHashSet<String> states = new LinkedHashSet<>();
 	private int headPosition=0;
 	private boolean machineRunning =false;
 	private String currentState="";
-	private String startState="";
-	private String endState ="";
+	private String startState=null;
+	private String endState =null;
 
 	public Tape getTape() {
 		return tape;
@@ -41,22 +42,22 @@ public class TuringMachine {
 		this.instructionList = instructionList;
 	}
 	
-	public ArrayList<Character> getInputAlphabet() {
+	public LinkedHashSet<Character> getInputAlphabet() {
 		return inputAlphabet;
 	}
 	
-	public void setInputAlphabet(ArrayList<Character> inputAlphabet) throws Exception {
+	public void setInputAlphabet(LinkedHashSet<Character> inputAlphabet) throws Exception {
 		if(!machineRunning) {
 			this.inputAlphabet = inputAlphabet;
 		} else {
 			throw new Exception("You can't change the input alphabet while running the machine!");
 		}
 	}
-	public ArrayList<Character> getTapeAlphabet() {
+	public LinkedHashSet<Character> getTapeAlphabet() {
 		return tapeAlphabet;
 	}
 	
-	public void setTapeAlphabet(ArrayList<Character> tapeAlphabet) throws Exception {
+	public void setTapeAlphabet(LinkedHashSet<Character> tapeAlphabet) throws Exception {
 		if(!machineRunning) {
 			this.tapeAlphabet = tapeAlphabet;
 		} else {
@@ -72,11 +73,11 @@ public class TuringMachine {
 		machineRunning = isMachineRunning;
 	}
 	
-	public ArrayList<String> getStates() {
+	public LinkedHashSet<String> getStates() {
 		return states;
 	}
 	
-	public void setStates(ArrayList<String> states) throws Exception {
+	public void setStates(LinkedHashSet<String> states) throws Exception {
 		if(!machineRunning) {
 			this.states = states;
 		} else {

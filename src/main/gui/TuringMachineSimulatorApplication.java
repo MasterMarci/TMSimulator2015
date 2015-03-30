@@ -19,12 +19,21 @@ public class TuringMachineSimulatorApplication extends Application {
 	private MainViewController mainController;
 	private TuringMachine tm = new TuringMachine();
 	
+	public TuringMachine getTm() {
+		return tm;
+	}
+
+	public void setTm(TuringMachine tm) {
+		this.tm = tm;
+	}
+
 	@Override
 	public void start(Stage arg0) throws Exception {
 		this.primaryStage = arg0;
 		this.primaryStage.setTitle("TuringMachineSimulator");
 		showMainScene();
 		this.primaryStage.show();
+		this.mainController.init();
 
 	}
 

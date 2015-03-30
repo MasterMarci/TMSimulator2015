@@ -3,15 +3,25 @@ package main.gui;
 import java.util.regex.Pattern;
 
 import sun.misc.Regexp;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 public class MainViewController {
 	
-	TuringMachineSimulatorApplication application;
+	private boolean IsStartStateDefined=false;
+	
+	private boolean IsEndStateDefined=false;
+	
+	private Thread machineSimulatorThread;
+	
+	private TuringMachineSimulatorApplication application;
 	
 	public TuringMachineSimulatorApplication getApplication() {
 		return application;
@@ -20,9 +30,35 @@ public class MainViewController {
 	public void setApplication(TuringMachineSimulatorApplication application) {
 		this.application = application;
 	}
+	
+	public void init() {
+		startStateChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+			
+			@Override
+			public void changed(ObservableValue<? extends String> arg0,
+					String arg1, String arg2) {
+				if(arg0.getValue() != null && arg0.getValue().length() != 0) {
+					IsStartStateDefined=true;
+				}
+				
+			}
+		});
+		
+		endStateChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+			
+			@Override
+			public void changed(ObservableValue<? extends String> arg0,
+					String arg1, String arg2) {
+				if(arg0.getValue() != null && arg0.getValue().length() != 0) {
+					IsEndStateDefined=true;
+				}
+				
+			}
+		});
+	}
 
 	@FXML
-	TextField tapeInputTextField;
+	private TextField tapeInputTextField;
 	
 	@FXML
 	private TextField inputAlphabetTextField;
@@ -54,19 +90,71 @@ public class MainViewController {
 	@FXML
 	private TableColumn<String, String> headDirectionColumn;
 	
+	@FXML
+	private ChoiceBox startStateChoiceBox;	
 	
+	@FXML
+	private ChoiceBox endStateChoiceBox;
+	
+	@FXML
+	private ComboBox stateInputNewInstruction;
+	
+	@FXML
+	private ComboBox stateOutputNewInstruction;
+	
+	@FXML
+	private ComboBox tapeInputNewInstruction;
+	
+	@FXML
+	private ComboBox tapeOutputNewInstruction;
+	
+	@FXML
+	private ComboBox headDirectionNewInstruction;
+	
+	@FXML
+	private Button addInstructionButton;
+	
+	@FXML
 	public void startTMButtonClicked() {
 		
 	}
 	
-	public void saveStatesFromTextFieldToStringList() {
+	private void saveStatesFromTextFieldToTMStates() {
 		String dirtyStatelist=statesTextField.getText();
-		String[] states=dirtyStatelist.split(",");
+		String[] states=dirtyStatelist.trim().split(",");
 		for(String s:states) {
-			
+			this.getApplication().getTm().getStates().add(s);
 		}
-		dirtyStatelist.trim();
 	}
+	
+	private void saveInputAlphabetFromTextFieldToTMIAlphabet() {
+		String dirtyAlphabetlist=inputAlphabetTextField.getText();
+		String[] symbols=dirtyAlphabetlist.trim().split(",");
+		for(String s:symbols) {
+			this.getApplication().getTm().getInputAlphabet().add(s.charAt(0));
+		}
+	}
+	
+	private void saveTapeAlphabetFromTextFieldToTMIAlphabet() {
+		String dirtyAlphabetlist=tapeAlphabetTextField.getText();
+		String[] symbols=dirtyAlphabetlist.trim().split(",");
+		for(String s:symbols) {
+			this.getApplication().getTm().getInputAlphabet().add(s.charAt(0));
+		}
+	}
+	
+	private void saveTapeFromTextFieldToTMTape() {
+		this.getApplication().getTm().getTape().setContent(new StringBuilder(tapeInputTextField.getText()));
+	}
+	
+	private void addStatesToChoiceBoxesForStartandEndState() {
+		for (String s:this.getApplication().getTm().getStates()) {
+			startStateChoiceBox.getItems().add(s);
+			endStateChoiceBox.getItems().add(s);
+		}
+	}
+	
+	
 	
 
 }

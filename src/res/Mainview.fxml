@@ -33,7 +33,7 @@
                     <Label alignment="CENTER" font="$x1" layoutX="49.0" layoutY="199.0" prefHeight="23.0" prefWidth="132.00009999999747" text="Arbeitsalphabet:" />
                     <TextField fx:id="statesTextField" layoutX="49.0" layoutY="306.0" prefWidth="200.0" />
                     <Label alignment="CENTER" font="$x1" layoutX="49.0" layoutY="278.0" prefHeight="23.0" prefWidth="146.0" text="Zustandsmenge:" />
-                    <Button fx:id="startTMButton" layoutX="269.0" layoutY="306.0" mnemonicParsing="false" prefHeight="22.9998779296875" text="Starte TM" />
+                    <Button fx:id="startTMButton" layoutX="269.0" layoutY="306.0" mnemonicParsing="false" onAction="#startTMButtonClicked" prefHeight="22.9998779296875" text="Starte TM" />
                     <ChoiceBox fx:id="startStateChoiceBox" layoutX="317.0" layoutY="152.0">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
@@ -63,7 +63,7 @@
                   <children>
                     <HBox id="HBox" alignment="CENTER" layoutX="4.0" layoutY="49.0" spacing="5.0">
                       <children>
-                        <ComboBox minWidth="39.0" prefHeight="21.0" prefWidth="48.0" promptText="Zin">
+                        <ComboBox fx:id="stateInputNewInstruction" disable="true" editable="false" minWidth="39.0" prefHeight="21.0" prefWidth="48.0" promptText="Zin">
                           <items>
                             <FXCollections fx:factory="observableArrayList">
                               <String fx:value="Item 1" />
@@ -72,7 +72,7 @@
                             </FXCollections>
                           </items>
                         </ComboBox>
-                        <ComboBox minWidth="48.0" prefHeight="21.0" prefWidth="56.0" promptText="Zout">
+                        <ComboBox fx:id="stateOutputNewInstruction" disable="true" minWidth="48.0" prefHeight="21.0" prefWidth="56.0" promptText="Zout">
                           <items>
                             <FXCollections fx:factory="observableArrayList">
                               <String fx:value="Item 1" />
@@ -81,7 +81,7 @@
                             </FXCollections>
                           </items>
                         </ComboBox>
-                        <ComboBox prefHeight="21.0" prefWidth="56.0" promptText="Tin">
+                        <ComboBox fx:id="tapeInputNewInstruction" disable="true" prefHeight="21.0" prefWidth="56.0" promptText="Tin">
                           <items>
                             <FXCollections fx:factory="observableArrayList">
                               <String fx:value="Item 1" />
@@ -90,7 +90,7 @@
                             </FXCollections>
                           </items>
                         </ComboBox>
-                        <ComboBox prefHeight="20.999900000002526" prefWidth="56.0" promptText="Tout">
+                        <ComboBox fx:id="tapeOutputNewInstruction" disable="true" prefHeight="20.999900000002526" prefWidth="56.0" promptText="Tout">
                           <items>
                             <FXCollections fx:factory="observableArrayList">
                               <String fx:value="Item 1" />
@@ -99,7 +99,7 @@
                             </FXCollections>
                           </items>
                         </ComboBox>
-                        <ChoiceBox>
+                        <ChoiceBox id="NewInstruction" fx:id="headDirectionNewInstruction" disable="true">
                           <items>
                             <FXCollections fx:factory="observableArrayList">
                               <String fx:value="Item 1" />
@@ -108,7 +108,7 @@
                             </FXCollections>
                           </items>
                         </ChoiceBox>
-                        <Button mnemonicParsing="false" text="Hinzufügen" />
+                        <Button id="AddInstructionButton" fx:id="addInstructionButton" cancelButton="false" defaultButton="false" disable="true" mnemonicParsing="false" text="Hinzufügen" />
                       </children>
                     </HBox>
                     <TableView fx:id="instructionTable" layoutX="14.0" layoutY="108.0" prefHeight="222.0" prefWidth="289.0">
