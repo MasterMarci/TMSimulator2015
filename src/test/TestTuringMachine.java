@@ -2,6 +2,8 @@ package test;
 
 import java.util.ArrayList;
 
+import javafx.collections.FXCollections;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -44,7 +46,7 @@ public class TestTuringMachine {
 
 		
 		tm.getTapeAlphabet().add(new Character('#'));
-		tm.setInstructionList(new ArrayList<Instruction>());
+		tm.setInstructionList(FXCollections.observableArrayList(new ArrayList<Instruction>()));
 		tm.getInstructionList().add(new Instruction("Start","Start",'a','b',HeadDirection.RIGHT));
 		tm.getInstructionList().add(new Instruction("Start", "Start", 'b', '#', HeadDirection.RIGHT));
 		tm.getInstructionList().add(new Instruction("Start", "#", '#', '#', HeadDirection.NONE));

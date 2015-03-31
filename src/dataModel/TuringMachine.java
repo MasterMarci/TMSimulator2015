@@ -3,9 +3,13 @@ package dataModel;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
+
 public class TuringMachine {
 	
-	private ArrayList<Instruction> instructionList = new ArrayList<Instruction>();
+	private ObservableList<Instruction> instructionList = FXCollections.observableArrayList(new ArrayList<Instruction>());
 	private Tape tape = new Tape();
 
 	private LinkedHashSet<Character> inputAlphabet = new LinkedHashSet<>();
@@ -35,10 +39,10 @@ public class TuringMachine {
 			throw new Exception("Tried to set invalid headpostion! Action aborted.");
 		}
 	}
-	public ArrayList<Instruction> getInstructionList() {
+	public ObservableList<Instruction> getInstructionList() {
 		return instructionList;
 	}
-	public void setInstructionList(ArrayList<Instruction> instructionList) {
+	public void setInstructionList(ObservableList<Instruction> instructionList) {
 		this.instructionList = instructionList;
 	}
 	

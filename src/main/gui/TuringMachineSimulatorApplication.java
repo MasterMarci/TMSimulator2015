@@ -18,7 +18,16 @@ public class TuringMachineSimulatorApplication extends Application {
 	private Stage primaryStage;
 	private MainViewController mainController;
 	private TuringMachine tm = new TuringMachine();
+	private AnchorPane pane;
 	
+	public AnchorPane getPane() {
+		return pane;
+	}
+
+	public void setPane(AnchorPane pane) {
+		this.pane = pane;
+	}
+
 	public TuringMachine getTm() {
 		return tm;
 	}
@@ -41,7 +50,7 @@ public class TuringMachineSimulatorApplication extends Application {
 		String path = this.getHostServices().resolveURI(this.getHostServices().getDocumentBase(),"src/res/Mainview.fxml");
 		try {
 			FXMLLoader loader = new FXMLLoader(new URL(path));
-			AnchorPane pane = loader.load();
+			pane = loader.load();
 			this.mainController=loader.getController();
 			this.primaryStage.setScene(new Scene(pane));
 			this.mainController.setApplication(this);
